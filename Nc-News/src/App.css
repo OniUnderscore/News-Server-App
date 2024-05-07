@@ -1,6 +1,79 @@
+body {
+  font-size: 25px;
+}
+
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 10pt;
+  }
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
+  margin: auto;
+  padding: 0px;
   text-align: center;
+}
+
+nav > * {
+  padding: 10px 10px;
+}
+
+ul {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: auto;
+  padding: 0px;
+}
+
+.articleCard {
+  display: grid;
+  grid-template-rows: 20% 80%;
+  grid-template-columns: 45% 55%;
+  text-align: left;
+  width: 75vw;
+  max-width: 500px;
+  height: 46.4vw;
+  max-height: 309px;
+  border-style: solid;
+  margin: 5px 0px;
+  border-radius: 25px;
+}
+
+.articleCard > h1 {
+  margin: -2.5px -3px -0px -2.5px;
+  padding: 10px;
+  font-size: 90%;
+  border-radius: 25px 25px 0px 0px;
+  grid-column: 1 / 3;
+  grid-row: 1;
+  margin: 1% 0% 0% 0%;
+}
+
+.articleCard > div {
+  grid-column: 1 / 2;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 25% 25% 25% 25%;
+  margin: 3%;
+}
+
+.articleCard > div > h2 {
+  font-size: 70%;
+  padding: 0px 5px;
+}
+
+.articleCard > div > p {
+  font-size: 70%;
+  margin: 13% 5px;
+}
+
+.articleCard > img {
+  margin: auto 3% 3% auto;
+  aspect-ratio: 1 /1;
+  height: 90%;
+  border-style: solid;
+  object-fit: cover;
+  border-radius: 15px;
 }
