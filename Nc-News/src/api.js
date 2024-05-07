@@ -7,3 +7,7 @@ const api = axios.create({
 export function getArticles() {
   return api.get("/articles");
 }
+
+export function getArticle(article_id) {
+  return api.get(`/articles/${article_id}`);
+}

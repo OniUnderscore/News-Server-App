@@ -20,7 +20,7 @@ export function Articles() {
       {isLoading && <h2>Loading...</h2>}
       <ul>
         {articles.map((article) => {
-          return <ArticleCard article={article} />;
+          return <ArticleCard key={article.article_id} article={article} />;
         })}
       </ul>
     </section>

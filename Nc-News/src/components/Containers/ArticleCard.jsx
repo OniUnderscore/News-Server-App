@@ -1,8 +1,12 @@
+import { Link } from "react-router-dom";
+
 export function ArticleCard({ article }) {
   const created = new Date(article.created_at);
   return (
-    <li className="articleCard">
-      <h1>{article.title}</h1>
+    <li key={article.article_id} className="articleCard">
+      <Link className="ArticleLink" to={"/articles/" + article.article_id}>
+        {article.title}
+      </Link>
       <div>
         <h2>Author:</h2>
         <p>{article.author}</p>
