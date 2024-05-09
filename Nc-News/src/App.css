@@ -250,6 +250,26 @@ article > img {
   display: none;
 }
 
+.commentForm {
+  margin: 10px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.commentForm > textarea {
+  margin: auto;
+  width: 55%;
+  height: 10vh;
+  text-align: left;
+  text-wrap: wrap;
+}
+
+.commentForm > button {
+  width: 15%;
+  text-align: center;
+  margin: 10px auto;
+}
+
 @media only screen and (max-width: 600px) {
   body {
     font-size: 10pt;
@@ -278,5 +298,13 @@ article > img {
 
   .voteContainer > .EggButton > * {
     width: 35%;
+  }
+
+  .commentForm > textarea {
+    width: 100%;
+  }
+
+  .commentForm > button {
+    width: 30%;
   }
 }

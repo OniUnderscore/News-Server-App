@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { patchComment } from "../../api";
 
-export function CommentCard({ comment }) {
+export function CommentCard({ comment, comments }) {
   const [vote, setVote] = useState(0);
   const [votes, setVotes] = useState(comment.votes);
 
@@ -15,6 +15,10 @@ export function CommentCard({ comment }) {
       return votes + vote;
     });
   }, [vote]);
+
+  useEffect(() => {
+    setVotes(comment.votes);
+  }, [comments]);
 
   useEffect(() => {
     patchComment(comment.comment_id, vote);
