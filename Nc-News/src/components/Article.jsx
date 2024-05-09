@@ -99,7 +99,7 @@ export function Article() {
                 <GreyUpEgg onClick={() => upVote()} />
               )}
             </div>
-            <p>{votes}</p>
+            <p className="upvotes">{votes}</p>
             <div className="EggButton">
               {vote <= -1 ? (
                 <DownEgg onClick={() => resetVote()} />
@@ -117,9 +117,9 @@ export function Article() {
         </article>
         <hr className="commentPreviews" />
         <section className="commentPreviews">
-          {comments[0] && <CommentCard comment={comments[0]} />}
-          {comments[1] && <CommentCard comment={comments[1]} />}
-          {comments[2] && <CommentCard comment={comments[2]} />}
+          comments[0] ^^ <CommentCard comment={comments[0]} />
+          <CommentCard comment={comments[1]} />
+          <CommentCard comment={comments[2]} />
           <Link
             className="comments"
             to={"/articles/" + article_id + "/comments"}
