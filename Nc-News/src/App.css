@@ -2,11 +2,6 @@ body {
   font-size: 25px;
 }
 
-img {
-  height: 100px;
-  width: 100px;
-}
-
 #root {
   margin: auto;
   padding: 0px;
@@ -101,7 +96,7 @@ ul {
 article {
   display: grid;
   grid-template-columns: 15% 10% 50% 10% 15%;
-  grid-template-rows: 10% 10% 30% minmax(25%, max-content) 10%;
+  grid-template-rows: 10% 10% 30% minmax(25%, fit-content) 10%;
   width: 75vw;
 }
 
@@ -143,8 +138,8 @@ article > img {
   grid-row: 4 / 5;
   grid-column: 2 / 5;
   text-align: justify;
+  margin-bottom: 10%;
 }
-
 .upvotes {
   margin-top: 25px;
   text-align: center;
@@ -200,16 +195,37 @@ article > img {
   display: flex;
   flex-direction: column;
   justify-self: center;
-  margin: auto;
+  margin: 10px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
   grid-row: 1 / 5;
   grid-column: 1 /2;
+  width: 100%;
+  width: 100%;
 }
 
 .EggButton {
   margin: auto;
   justify-self: center;
   min-width: 25px;
-  width: 100%;
+}
+
+.EggButton > * {
+  overflow: visible;
+}
+
+.voteContainer {
+  grid-row: 5 / 6;
+  grid-column: 1 / 3;
+  display: flex;
+}
+
+.voteContainer > .EggButton {
+  margin: auto;
+  height: 55%;
+}
+
+.voteContainer > .EggButton > * {
+  width: 25%;
 }
 
 .commentPreviews > .commentCard {
@@ -254,5 +270,13 @@ article > img {
     margin: 0px;
     padding: 0px;
     object-fit: cover;
+  }
+  .voteContainer > .EggButton {
+    margin: auto;
+    height: 25%;
+  }
+
+  .voteContainer > .EggButton > * {
+    width: 35%;
   }
 }

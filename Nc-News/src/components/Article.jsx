@@ -1,14 +1,51 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { getArticle, getComments } from "../api";
+import { getArticle, getComments, patchArticle } from "../api";
 import { CommentCard } from "./Containers/CommentCard";
+import UpEgg from "./images/UpEgg.svg?react";
+import DownEgg from "./images/DownEgg.svg?react";
+import GreyDownEgg from "./images/GreyDownEgg.svg?react";
+import GreyUpEgg from "./images/GreyUpEgg.svg?react";
 
 export function Article() {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const created = new Date(article.created_at);
   const [isLoading, setIsLoading] = useState(true);
+
   const [comments, setComments] = useState([]);
+  const [vote, setVote] = useState(0);
+  const [votes, setVotes] = useState(0);
+
+  const resetVote = () => {
+    if (vote >= 1) {
+      setVotes((currentVotes) => {
+        return votes - 1;
+      });
+      patchArticle(article.article_id, -1);
+    } else if (vote <= -1) {
+      setVotes((currentVotes) => {
+        return votes + 1;
+      });
+      patchArticle(article.article_id, 1);
+    }
+    setVote(0);
+  };
+
+  const upVote = () => {
+    if (vote <= -1) {
+      setVote(2);
+    } else if (vote === 0) {
+      setVote(1);
+    }
+  };
+  const DownVote = () => {
+    if (vote >= 1) {
+      setVote(-2);
+    } else if (vote === 0) {
+      setVote(-1);
+    }
+  };
 
   useEffect(() => {
     setIsLoading(true);
@@ -16,10 +53,23 @@ export function Article() {
       ([article, comments]) => {
         setArticle(article.data.article);
         setComments(comments.data.comments);
+        setVotes(article.data.article.votes);
         setIsLoading(false);
       }
     );
   }, []);
+
+  useEffect(() => {
+    setVotes((currentVotes) => {
+      console.log(votes);
+      return votes + vote;
+    });
+  }, [vote]);
+
+  useEffect(() => {
+    patchArticle(article_id, vote);
+  }, [votes]);
+
   if (isLoading) {
     return (
       <article>
@@ -40,7 +90,24 @@ export function Article() {
             alt={article.title + " Killer Image"}
           />
           <p className="body">{article.body}</p>
-          <p className="upvotes">{article.votes + " Upvotes"}</p>
+
+          <div className="voteContainer">
+            <div className="EggButton">
+              {vote >= 1 ? (
+                <UpEgg onClick={() => resetVote()} />
+              ) : (
+                <GreyUpEgg onClick={() => upVote()} />
+              )}
+            </div>
+            <p className="upvotes">{votes}</p>
+            <div className="EggButton">
+              {vote <= -1 ? (
+                <DownEgg onClick={() => resetVote()} />
+              ) : (
+                <GreyDownEgg onClick={() => DownVote(-1)} />
+              )}
+            </div>
+          </div>
           <Link
             className="comments"
             to={"/articles/" + article_id + "/comments"}
@@ -50,9 +117,9 @@ export function Article() {
         </article>
         <hr className="commentPreviews" />
         <section className="commentPreviews">
-          <CommentCard comment={comments[0]} />
-          <CommentCard comment={comments[1]} />
-          <CommentCard comment={comments[2]} />
+          {comments[0] && <CommentCard comment={comments[0]} />}
+          {comments[1] && <CommentCard comment={comments[1]} />}
+          {comments[2] && <CommentCard comment={comments[2]} />}
           <Link
             className="comments"
             to={"/articles/" + article_id + "/comments"}
