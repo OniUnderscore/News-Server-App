@@ -226,7 +226,7 @@ article > img {
 
 .voteContainer > .EggButton {
   margin: auto;
-  height: 75%;
+  height: 55%;
 }
 
 .voteContainer > .EggButton > * {
@@ -278,7 +278,7 @@ article > img {
   }
   .voteContainer > .EggButton {
     margin: auto;
-    height: 55%;
+    height: 25%;
   }
 
   .voteContainer > .EggButton > * {
