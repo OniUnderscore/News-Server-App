@@ -6,13 +6,14 @@ import UpEgg from "./images/UpEgg.svg?react";
 import DownEgg from "./images/DownEgg.svg?react";
 import GreyDownEgg from "./images/GreyDownEgg.svg?react";
 import GreyUpEgg from "./images/GreyUpEgg.svg?react";
+import { CommentForm } from "./commentForm";
 
-export function Article() {
+export function Article({ user }) {
   const { article_id } = useParams();
   const [article, setArticle] = useState({});
   const created = new Date(article.created_at);
   const [isLoading, setIsLoading] = useState(true);
-
+  const [commenting, setCommenting] = useState(false);
   const [comments, setComments] = useState([]);
   const [vote, setVote] = useState(0);
   const [votes, setVotes] = useState(0);
@@ -58,6 +59,12 @@ export function Article() {
       }
     );
   }, []);
+
+  useEffect(() => {
+    getComments(article_id).then((response) => {
+      setComments(response.data.comments);
+    });
+  }, [comments]);
 
   useEffect(() => {
     setVotes((currentVotes) => {
@@ -117,9 +124,29 @@ export function Article() {
         </article>
         <hr className="commentPreviews" />
         <section className="commentPreviews">
-          {comments[0] && <CommentCard comment={comments[0]} />}
-          {comments[1] && <CommentCard comment={comments[1]} />}
-          {comments[2] && <CommentCard comment={comments[2]} />}
+          <button
+            onClick={() => {
+              setCommenting(true);
+            }}
+          >
+            New Comment
+          </button>
+          {commenting && (
+            <CommentForm
+              user={user}
+              article_id={article_id}
+              setCommenting={setCommenting}
+            />
+          )}
+          {comments[0] && (
+            <CommentCard comment={comments[0]} comments={comments} />
+          )}
+          {comments[1] && (
+            <CommentCard comment={comments[1]} comments={comments} />
+          )}
+          {comments[2] && (
+            <CommentCard comment={comments[2]} comments={comments} />
+          )}
           <Link
             className="comments"
             to={"/articles/" + article_id + "/comments"}

@@ -23,3 +23,9 @@ export function patchComment(comment_id, inc_votes) {
 export function patchArticle(article_id, inc_votes) {
   return api.patch(`/articles/${article_id}`, { inc_votes });
 }
+
+export function postComment(article_id, comment) {
+  console.log(article_id);
+  console.log({ comment });
+  return api.post(`/articles/${article_id}/comments`, comment);
+}
