@@ -2,11 +2,6 @@ body {
   font-size: 25px;
 }
 
-img {
-  height: 100px;
-  width: 100px;
-}
-
 #root {
   margin: auto;
   padding: 0px;
