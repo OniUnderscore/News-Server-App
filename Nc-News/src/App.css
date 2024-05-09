@@ -2,6 +2,11 @@ body {
   font-size: 25px;
 }
 
+img {
+  height: 100px;
+  width: 100px;
+}
+
 #root {
   margin: auto;
   padding: 0px;
@@ -158,6 +163,77 @@ article > img {
   color: lab(from darkgrey 40 0 0);
 }
 
+.commentCard {
+  justify-self: center;
+  margin: auto;
+  display: grid;
+  width: 75vw;
+  border-style: solid;
+  border-radius: 25px;
+  grid-template-columns: 10% 90%;
+  grid-template-rows: 16.665% 16.665% 33.33% 33.33%;
+  margin: 5px auto;
+}
+.commentTitle {
+  font-size: 2.5em;
+}
+
+.commentOrigin {
+  align-items: center;
+  text-align: left;
+  padding: 0px 10px 0px 10px;
+  grid-row: 1;
+  grid-column: 2/3;
+  font-size: 0.8em;
+  color: lab(from darkgrey 40 0 0);
+}
+
+.commentBody {
+  text-align: justify;
+  margin: auto;
+  padding: 5px 10px 5px 10px;
+  grid-row: 2/ 5;
+  grid-column: 2/3;
+}
+
+.commentVotes {
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
+  margin: auto;
+  grid-row: 1 / 5;
+  grid-column: 1 /2;
+}
+
+.EggButton {
+  margin: auto;
+  justify-self: center;
+  min-width: 25px;
+  width: 100%;
+}
+
+.commentPreviews > .commentCard {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 15vh;
+}
+
+.commentPreviews > .commentCard > .commentBody {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  margin-top: 25px;
+  padding: 5px 10px 5px 10px;
+  grid-row: 2/ 5;
+  grid-column: 2/3;
+}
+
+.commentPreviews > .commentCard > .commentVotes > .EggButton {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
   body {
     font-size: 10pt;
@@ -166,6 +242,10 @@ article > img {
     width: 100vw;
   }
   article > h1 {
+    font-size: 2em;
+  }
+
+  .commentTitle {
     font-size: 2em;
   }
   article > img {
