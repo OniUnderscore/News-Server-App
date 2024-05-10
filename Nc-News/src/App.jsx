@@ -6,6 +6,7 @@ import { Articles } from "./components/Articles";
 import { Article } from "./components/Article";
 import { Comments } from "./components/Comments";
 import { useState } from "react";
+import { Topics } from "./components/Topics";
 
 function App() {
   const [user, setUser] = useState("happyamy2016");
@@ -14,12 +15,14 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/topics" element={<Topics />} />
         <Route path="/articles" element={<Articles user={user} />} />
         <Route path="/articles/:article_id" element={<Article user={user} />} />
         <Route
           path="/articles/:article_id/comments"
           element={<Comments user={user} />}
         />
+        <Route path="/topics/:slug" element={<Articles user={user} />} />
       </Routes>
     </>
   );

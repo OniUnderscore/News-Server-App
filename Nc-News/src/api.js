@@ -4,8 +4,9 @@ const api = axios.create({
   baseURL: "https://news-server-api.onrender.com/api",
 });
 
-export function getArticles() {
-  return api.get("/articles");
+export function getArticles(params) {
+  console.log(params);
+  return api.get("/articles", params);
 }
 
 export function getArticle(article_id) {
@@ -30,4 +31,8 @@ export function postComment(article_id, comment) {
 
 export function deleteComment(comment_id) {
   return api.delete(`/comments/${comment_id}`);
+}
+
+export function getTopics() {
+  return api.get("/topics");
 }
