@@ -1,23 +1,31 @@
 import { useEffect, useState } from "react";
 import { getArticles } from "../api";
 import { ArticleCard } from "./Containers/ArticleCard";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { SortForm } from "./SortForm";
+import Lottie from "lottie-react";
+import Animation from "./images/Animation - 1715350378279.json";
 
 export function Articles() {
   const [articles, setArticles] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [sort, setSort] = useState("created_at");
   const [dir, setDir] = useState("asc");
+  const [error, setError] = useState(false);
   const { slug } = useParams();
   const params = { params: { topic: slug, sort_by: sort, order: dir } };
 
   useEffect(() => {
+    setError(false);
     setIsLoading(true);
-    getArticles(params).then((response) => {
-      setArticles(response.data.articles);
-      setIsLoading(false);
-    });
+    getArticles(params)
+      .then((response) => {
+        setArticles(response.data.articles);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        setError(true);
+      });
   }, [slug, sort, dir]);
 
   const handleSort = (e) => {
@@ -29,8 +37,14 @@ export function Articles() {
     e.preventDefault();
     setDir(e.target.value);
   };
-
-  if (isLoading) {
+  if (error) {
+    return (
+      <section>
+        <h2>404: Topic Not Found</h2>
+        <Lottie animationData={Animation} loop={true} />
+      </section>
+    );
+  } else if (isLoading) {
     return (
       <section>
         <h2>Loading...</h2>

@@ -7,6 +7,8 @@ import DownEgg from "./images/DownEgg.svg?react";
 import GreyDownEgg from "./images/GreyDownEgg.svg?react";
 import GreyUpEgg from "./images/GreyUpEgg.svg?react";
 import { CommentForm } from "./commentForm";
+import Lottie from "lottie-react";
+import Animation from "./images/Animation - 1715350378279.json";
 
 export function Article({ user }) {
   const { article_id } = useParams();
@@ -17,6 +19,7 @@ export function Article({ user }) {
   const [comments, setComments] = useState([]);
   const [vote, setVote] = useState(0);
   const [votes, setVotes] = useState(0);
+  const [error, setError] = useState(false);
 
   const resetVote = () => {
     if (vote >= 1) {
@@ -49,16 +52,19 @@ export function Article({ user }) {
   };
 
   useEffect(() => {
+    setError(false);
     setIsLoading(true);
-    Promise.all([getArticle(article_id), getComments(article_id)]).then(
-      ([article, comments]) => {
+    Promise.all([getArticle(article_id), getComments(article_id)])
+      .then(([article, comments]) => {
         setArticle(article.data.article);
         setComments(comments.data.comments);
         setVotes(article.data.article.votes);
         setIsLoading(false);
-      }
-    );
-  }, []);
+      })
+      .catch((err) => {
+        setError(true);
+      });
+  }, [article_id]);
 
   useEffect(() => {
     getComments(article_id).then((response) => {
@@ -68,7 +74,6 @@ export function Article({ user }) {
 
   useEffect(() => {
     setVotes((currentVotes) => {
-      console.log(votes);
       return votes + vote;
     });
   }, [vote]);
@@ -77,7 +82,14 @@ export function Article({ user }) {
     patchArticle(article_id, vote);
   }, [votes]);
 
-  if (isLoading) {
+  if (error) {
+    return (
+      <section>
+        <h2>404: Article Not Found</h2>
+        <Lottie animationData={Animation} loop={true} />
+      </section>
+    );
+  } else if (isLoading) {
     return (
       <article>
         <h1>Loading...</h1>

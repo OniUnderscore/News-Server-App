@@ -37,6 +37,10 @@ nav > * {
   flex-direction: column;
 }
 
+.commentError {
+  color: lab(30 90%650%);
+}
+
 ul {
   list-style-type: none;
   display: flex;
