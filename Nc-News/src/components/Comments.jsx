@@ -57,7 +57,13 @@ export function Comments({ user }) {
         )}
         <ul>
           {comments.map((comment) => {
-            return <CommentCard key={comment.comment_id} comment={comment} />;
+            return (
+              <CommentCard
+                key={comment.comment_id}
+                comment={comment}
+                user={user}
+              />
+            );
           })}
         </ul>
       </section>

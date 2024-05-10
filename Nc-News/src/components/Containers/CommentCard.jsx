@@ -4,11 +4,12 @@ import GreyDownEgg from "../images/GreyDownEgg.svg?react";
 import GreyUpEgg from "../images/GreyUpEgg.svg?react";
 import { useState } from "react";
 import { useEffect } from "react";
-import { patchComment } from "../../api";
+import { deleteComment, patchComment } from "../../api";
 
-export function CommentCard({ comment, comments }) {
+export function CommentCard({ comment, comments, user }) {
   const [vote, setVote] = useState(0);
   const [votes, setVotes] = useState(comment.votes);
+  const [deleting, setDeleting] = useState(0);
 
   useEffect(() => {
     setVotes((currentVotes) => {
@@ -54,12 +55,34 @@ export function CommentCard({ comment, comments }) {
     }
   };
 
+  const handleDelete = (e) => {
+    if (deleting === 0) {
+      e.target.innerHTML = "Really?";
+      setDeleting(1);
+    } else if (deleting === 1) {
+      e.target.innerHTML = "Deleting...";
+      deleteComment(comment.comment_id).then(() => {
+        setDeleting(0);
+        e.target.innerHTML = "X";
+      });
+    }
+  };
+
   const created = new Date(comment.created_at);
   return (
     <li className="commentCard">
       <p className="commentOrigin">
         {comment.author} at {created.toLocaleString("en-GB")}
       </p>
+      {user === comment.author && (
+        <button
+          onClick={(e) => {
+            handleDelete(e);
+          }}
+        >
+          X
+        </button>
+      )}
       <p className="commentBody">{comment.body}</p>
       <div className="commentVotes">
         <div className="EggButton">

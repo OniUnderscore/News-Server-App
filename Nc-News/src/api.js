@@ -25,7 +25,9 @@ export function patchArticle(article_id, inc_votes) {
 }
 
 export function postComment(article_id, comment) {
-  console.log(article_id);
-  console.log({ comment });
   return api.post(`/articles/${article_id}/comments`, comment);
+}
+
+export function deleteComment(comment_id) {
+  return api.delete(`/comments/${comment_id}`);
 }
