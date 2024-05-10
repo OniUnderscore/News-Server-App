@@ -139,13 +139,26 @@ export function Article({ user }) {
             />
           )}
           {comments[0] && (
-            <CommentCard comment={comments[0]} comments={comments} />
+            <CommentCard
+              comment={comments[0]}
+              comments={comments}
+              user={user}
+            />
           )}
           {comments[1] && (
-            <CommentCard comment={comments[1]} comments={comments} />
+            <CommentCard
+              comment={comments[1]}
+              comments={comments}
+              s
+              user={user}
+            />
           )}
           {comments[2] && (
-            <CommentCard comment={comments[2]} comments={comments} />
+            <CommentCard
+              comment={comments[2]}
+              comments={comments}
+              user={user}
+            />
           )}
           <Link
             className="comments"

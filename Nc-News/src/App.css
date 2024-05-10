@@ -169,6 +169,19 @@ article > img {
   grid-template-rows: 16.665% 16.665% 33.33% 33.33%;
   margin: 5px auto;
 }
+
+.commentCard > button {
+  justify-self: right;
+  margin: 2% 2.5%;
+  padding: 0px 10px 0px 10px;
+  grid-row: 1;
+  width: fit-content;
+  height: fit-content;
+  grid-column: 2/3;
+  font-size: 0.8em;
+  background-color: lab(90% 92% 63%);
+}
+
 .commentTitle {
   font-size: 2.5em;
 }
@@ -185,7 +198,7 @@ article > img {
 
 .commentBody {
   text-align: justify;
-  margin: auto;
+  margin: auto 10px;
   padding: 5px 10px 5px 10px;
   grid-row: 2/ 5;
   grid-column: 2/3;
@@ -306,5 +319,17 @@ article > img {
 
   .commentForm > button {
     width: 30%;
+  }
+
+  .commentCard > button {
+    justify-self: left;
+    margin: 10% 2.5%;
+    padding: 0px 10px 0px 10px;
+    grid-row: 1;
+    width: fit-content;
+    height: fit-content;
+    grid-column: 2/3;
+    font-size: 0.8em;
+    background-color: lab(90% 92% 63%);
   }
 }
