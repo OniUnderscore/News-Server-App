@@ -16,16 +16,23 @@ export function Home({ user }) {
       setIsLoading(false);
     });
   }, []);
-
-  return (
-    <section className="HomeBox">
-      <h2>Welcome back {user}!</h2>
-      <h3>Your recent posts:</h3>
-      <ul>
-        {articles.map((article) => {
-          return <ArticleCard key={article.article_id} article={article} />;
-        })}
-      </ul>
-    </section>
-  );
+  if (isLoading) {
+    return (
+      <article>
+        <h1>Loading...</h1>
+      </article>
+    );
+  } else {
+    return (
+      <section className="HomeBox">
+        <h2>Welcome back {user}!</h2>
+        <h3>Your recent posts:</h3>
+        <ul>
+          {articles.map((article) => {
+            return <ArticleCard key={article.article_id} article={article} />;
+          })}
+        </ul>
+      </section>
+    );
+  }
 }

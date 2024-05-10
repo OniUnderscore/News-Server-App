@@ -7,6 +7,7 @@ import { Article } from "./components/Article";
 import { Comments } from "./components/Comments";
 import { useState } from "react";
 import { Topics } from "./components/Topics";
+import { ErrorPage } from "./components/errorpage";
 
 function App() {
   const [user, setUser] = useState("happyamy2016");
@@ -23,6 +24,7 @@ function App() {
           element={<Comments user={user} />}
         />
         <Route path="/topics/:slug" element={<Articles user={user} />} />
+        <Route path="/*" element={<ErrorPage />} />
       </Routes>
     </>
   );
