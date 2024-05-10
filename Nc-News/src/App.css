@@ -32,6 +32,11 @@ nav > * {
   padding: 10px 10px;
 }
 
+.HomeBox {
+  display: flex;
+  flex-direction: column;
+}
+
 ul {
   list-style-type: none;
   display: flex;
